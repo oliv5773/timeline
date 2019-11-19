@@ -46,7 +46,6 @@ body {
 
 .timeline-carousel__item .media-wrapper {
   height: 75.1vh;
-  width: 50%;
   -webkit-transition: all 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   -o-transition: all 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   transition: all 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
@@ -80,7 +79,7 @@ body {
   background-color: #0e233f;
   z-index: 1;
   position: relative;
-  margin: -15px 0 0px;
+  margin: -20px 0 0px;
   font-weight: 900;
 }
 
