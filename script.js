@@ -24,16 +24,16 @@ async function hentSVG() {
 }
 
 function showSVG() {
-  let placeholders = document.querySelectorAll(".media-wrapper");
+  let placeholders = document.querySelectorAll(".dino-svg");
 
   placeholders.forEach((placeholder, i) => {
-    placeholder.append(document.querySelector(`#dino_${i + 1}`));
+    placeholder.append(document.querySelector(`.dino_${i + 1}`));
 
     //placeholder.innerHTML = `<svg viewBox="0 0 100 100"><use xlink:href="#dino_${i}"></use></svg>`;
   });
 }
 
-const elms = document.querySelectorAll(".element");
+const elms = document.querySelectorAll(".dino-svg");
 
 const config = {
   root: null, //document.querySelector('#some-element')
@@ -41,15 +41,15 @@ const config = {
   threshold: [0, 0.25, 0.75, 1]
 };
 
-// observer = new IntersectionObserver(entries => {
-//   entries.forEach(entry => {
-//     if (entry.intersectionRatio > 0.75) {
-//       entry.target.classList.add("visible");
-//     } else {
-//       entry.target.classList.remove("visible");
-//     }
-//   });
-// }, config);
+let observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.intersectionRatio > 0.75) {
+      entry.target.classList.add("visible");
+    } else {
+      entry.target.classList.remove("visible");
+    }
+  });
+}, config);
 
 elms.forEach(elem => {
   observer.observe(elem);
