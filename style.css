@@ -20,9 +20,9 @@ body {
   margin-top: 11vh;
 }
 
-.text-wrapper h1, h2{
-    margin-left: 10%;
-
+.text-wrapper h1,
+h2 {
+  margin-left: 10%;
 }
 
 .timeline-carousel:after,
@@ -284,6 +284,15 @@ body {
 .dino-svg {
   opacity: 0;
   transition: opacity 1.5s ease;
+}
+
+.infobox {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  border: 2px solid black;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .visible {

@@ -1,13 +1,23 @@
 "use strict";
 
 let svg = {};
+let dinoData = [];
 
 window.addEventListener("DOMContentLoaded", init);
 
 function init() {
   console.log("running");
-  //loadJSON();
+  loadJSON();
   hentSVG();
+  intObserver();
+}
+
+function loadJSON() {
+  fetch("dino.json")
+    .then(response => response.json())
+    .then(jsonData => {
+      dinoData = jsonData;
+    });
 }
 
 async function hentSVG() {
@@ -18,8 +28,6 @@ async function hentSVG() {
   svg = await svgData.text();
   document.querySelector("#mother_placeholder").innerHTML = svg;
   document.querySelector("#mother_placeholder").style.display = "none";
-
-  console.log(svg);
   showSVG();
 }
 
@@ -33,24 +41,50 @@ function showSVG() {
   });
 }
 
-const elms = document.querySelectorAll(".dino-svg");
+function intObserver() {
+  const elms = document.querySelectorAll(".dino-svg, .intro");
 
-const config = {
-  root: null, //document.querySelector('#some-element')
-  rootMargin: "0px",
-  threshold: [0, 0.25, 0.75, 1]
-};
+  const config = {
+    root: null, //document.querySelector('#some-element')
+    rootMargin: "0px",
+    threshold: [0, 0.25, 0.75]
+  };
 
-let observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.intersectionRatio > 0.75) {
-      entry.target.classList.add("visible");
-    } else {
-      entry.target.classList.remove("visible");
+  let observer = new IntersectionObserver(entries => {
+    let visibleCount = 0;
+    // set visible counter to 0
+
+    entries.forEach(entry => {
+      console.log(entry);
+      console.log(entry.target.classList.className);
+
+      if (entry.intersectionRatio > 0.75) {
+        entry.target.classList.add("visible");
+        // count visible up!
+        visibleCount++;
+        //document.querySelector(".infobox").classList.add("visible");
+        console.log("visible");
+        let dinoID = parseInt(entry.target.dataset.id, 10);
+        let dino = dinoData[dinoID - 1];
+        document.querySelector(".info-name").textContent = dino.name;
+        document.querySelector(".info-time").textContent = dino.time;
+        document.querySelector(".info-desc").textContent = dino.description;
+      } else {
+        entry.target.classList.remove("visible");
+        //document.querySelector(".infobox").classList.remove("visible");
+        console.log("not visible");
+      }
+    });
+
+    if (visibleCount > 0) {
+      console.log(visibleCount);
+      document.querySelector(".infobox").classList.add("visible");
     }
-  });
-}, config);
 
-elms.forEach(elem => {
-  observer.observe(elem);
-});
+    // set infobox visible if visble counter > 0
+  }, config);
+
+  elms.forEach(elem => {
+    observer.observe(elem);
+  });
+}
