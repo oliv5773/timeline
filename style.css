@@ -5,9 +5,9 @@
 
 html {
   overflow-y: hidden;
-  background: rgb(255,255,255);
-background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(148,229,255,1) 11%, rgba(0,84,125,0.80015756302521) 70%, rgba(187,52,43,1) 100%);
-background-size: 1100%;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(148, 229, 255, 1) 11%, rgba(0, 84, 125, 0.80015756302521) 70%, rgba(187, 52, 43, 1) 100%);
+  background-size: 1100%;
 }
 
 body {
@@ -100,14 +100,27 @@ h2 {
 }
 
 .infobox {
-  opacity: 0;
+  /* opacity: 0; */
   transition: opacity 1.5s ease;
   border: 2px solid black;
-  position: fixed;
+  /* position: absolute; */
   top: 0;
-  left: 0;
+}
+
+#simon_emil {
+  height: 20vw;
+  width: 10vw;
+  position: fixed;
+  bottom: 5vh;
+  left: 5vw;
+  transform: scale(var(--scale));
+  transition: scale 2.5s ease;
 }
 
 .visible {
   opacity: 1;
+}
+
+.timeline-carousel__item {
+  max-height: 100vh;
 }
