@@ -1,15 +1,42 @@
 "use strict";
 
 let svg = {};
+let simonEmil = {};
 let dinoData = [];
 
 window.addEventListener("DOMContentLoaded", init);
 
+// Code to detect when scrolling has stopped from https://gomakethings.com/detecting-when-a-visitor-has-stopped-scrolling-with-vanilla-javascript/
+let isScrolling;
+window.addEventListener(
+  "scroll",
+  function(event) {
+    document.querySelector("#simon_emil img").src = "animerede_dinosaur/simonemilwalking.svg";
+    // Clear our timeout throughout the scroll
+    window.clearTimeout(isScrolling);
+
+    // Set a timeout to run after scrolling ends
+    isScrolling = setTimeout(function() {
+      // Run the callback
+      console.log("Scrolling has stopped.");
+      document.querySelector("#simon_emil img").src = "animerede_dinosaur/simonemil.svg";
+    }, 66);
+  },
+  false
+);
+
 function init() {
   console.log("running");
   loadJSON();
-  hentSVG();
+  getMotherSVG();
   intObserver();
+  document.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", () => {
+      console.log("button clicked");
+      document.querySelector("audio").currentTime = 0;
+      document.querySelector("audio").play();
+    });
+  });
 }
 
 function loadJSON() {
@@ -20,7 +47,7 @@ function loadJSON() {
     });
 }
 
-async function hentSVG() {
+async function getMotherSVG() {
   console.log("svg loaded");
   let url = "animerede_dinosaur/mother.svg";
   let svgData = await fetch(url);
@@ -36,13 +63,11 @@ function showSVG() {
 
   placeholders.forEach((placeholder, i) => {
     placeholder.append(document.querySelector(`.dino_${i + 1}`));
-
-    //placeholder.innerHTML = `<svg viewBox="0 0 100 100"><use xlink:href="#dino_${i}"></use></svg>`;
   });
 }
 
 function intObserver() {
-  const elms = document.querySelectorAll(".dino-svg, .intro");
+  const elms = document.querySelectorAll(".dino-svg");
 
   const config = {
     root: null, //document.querySelector('#some-element')
@@ -51,37 +76,25 @@ function intObserver() {
   };
 
   let observer = new IntersectionObserver(entries => {
-    let visibleCount = 0;
-    // set visible counter to 0
-
     entries.forEach(entry => {
       console.log(entry);
-      console.log(entry.target.classList.className);
 
       if (entry.intersectionRatio > 0.75) {
         entry.target.classList.add("visible");
-        // count visible up!
-        visibleCount++;
-        //document.querySelector(".infobox").classList.add("visible");
-        console.log("visible");
+
         let dinoID = parseInt(entry.target.dataset.id, 10);
         let dino = dinoData[dinoID - 1];
-        document.querySelector(".info-name").textContent = dino.name;
-        document.querySelector(".info-time").textContent = dino.time;
-        document.querySelector(".info-desc").textContent = dino.description;
+
+        document.querySelector(`.item${dinoID} .info-name`).textContent = dino.name;
+        document.querySelector(`.item${dinoID} .info-time`).textContent = dino.time;
+        document.querySelector(`.item${dinoID} .info-desc`).textContent = dino.description;
+        document.querySelector("audio").src = `audio/${dino.audio}`;
+
+        document.querySelector("#simon_emil").style.setProperty("--scale", dino.size);
       } else {
         entry.target.classList.remove("visible");
-        //document.querySelector(".infobox").classList.remove("visible");
-        console.log("not visible");
       }
     });
-
-    if (visibleCount > 0) {
-      console.log(visibleCount);
-      document.querySelector(".infobox").classList.add("visible");
-    }
-
-    // set infobox visible if visble counter > 0
   }, config);
 
   elms.forEach(elem => {
