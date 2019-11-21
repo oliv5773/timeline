@@ -6,17 +6,33 @@ let dinoData = [];
 
 window.addEventListener("DOMContentLoaded", init);
 
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+  e = e || window.event;
+
+  if (e.keyCode == "39") {
+    // right arrow
+    document.querySelector("#fremad").currentTime = 0;
+    document.querySelector("#fremad").play();
+  } else if (e.keyCode == "37") {
+    document.querySelector("#tilbage").currentTime = 0;
+    document.querySelector("#tilbage").play();
+  }
+
+}
+
 // Code to detect when scrolling has stopped from https://gomakethings.com/detecting-when-a-visitor-has-stopped-scrolling-with-vanilla-javascript/
 let isScrolling;
 window.addEventListener(
   "scroll",
-  function(event) {
+  function (event) {
     document.querySelector("#simon_emil img").src = "animerede_dinosaur/simonemilwalking.svg";
     // Clear our timeout throughout the scroll
     window.clearTimeout(isScrolling);
 
     // Set a timeout to run after scrolling ends
-    isScrolling = setTimeout(function() {
+    isScrolling = setTimeout(function () {
       // Run the callback
       console.log("Scrolling has stopped.");
       document.querySelector("#simon_emil img").src = "animerede_dinosaur/simonemil.svg";
@@ -33,8 +49,8 @@ function init() {
   document.querySelectorAll("button").forEach(button => {
     button.addEventListener("click", () => {
       console.log("button clicked");
-      document.querySelector("audio").currentTime = 0;
-      document.querySelector("audio").play();
+      document.querySelector("#dinosounds").currentTime = 0;
+      document.querySelector("#dinosounds").play();
     });
   });
 }
@@ -84,9 +100,6 @@ function intObserver() {
 
         let dinoID = parseInt(entry.target.dataset.id, 10);
         let dino = dinoData[dinoID - 1];
-
-        document.querySelector(`.item${dinoID} .info-name`).textContent = dino.name;
-        document.querySelector(`.item${dinoID} .info-time`).textContent = dino.time;
         document.querySelector(`.item${dinoID} .info-desc`).textContent = dino.description;
         document.querySelector("audio").src = `audio/${dino.audio}`;
 

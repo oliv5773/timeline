@@ -5,34 +5,68 @@
 
 html {
   overflow-y: hidden;
-  background: rgb(255, 255, 255);
   background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(148, 229, 255, 1) 11%, rgba(0, 84, 125, 0.80015756302521) 70%, rgba(187, 52, 43, 1) 100%);
-  background-size: 1100%;
+  background-size: 1200%;
+
 }
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
-  background-image: url("scenebaggrund.svg");
-  background-size: cover;
-  background-position-y: 250%;
 }
 
 .timeline-carousel {
   position: relative;
   height: 100vh;
   margin-top: 11vh;
+  
+}
+
+.intro{
+  width: 55%;
+}
+
+.intro h1{font-weight: bold;}
+
+h1, h3, h4{
+  font-family: 'Calistoga', cursive;
+}
+
+p{
+  /*font-family: 'Chicle', cursive;*/
+  font-family: 'Open Sans', sans-serif;
+letter-spacing: 1px;
+line-height: 20px;
+font-size: 1em, cursive;
+  font-weight: normal;
 }
 
 .text-wrapper h1,
-h2 {
+h3, h4 {
   margin-left: 10%;
+  font-weight: normal;
 }
+
+.text-wrapper h1{
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.text-wrapper h3{
+  color: white;
+  padding: 1em 1em;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 1em;
+}
+
+.text-wrapper h4{
+  margin-top: 0;
+  }
 
 .timeline-carousel h1 {
   font-size: 46px;
   line-height: 50px;
-  font-weight: 900;
   margin-top: 0;
 }
 
@@ -42,13 +76,48 @@ h2 {
 
 .timeline-carousel__item-wrapper .timeline-carousel__item {
   scroll-snap-align: start;
+  background-image: url("scenebaggrund.svg");
+  background-size: cover;
+  background-position-y: 120%;
+  background-repeat: repeat-x;
 }
 
 .timeline-carousel__item .media-wrapper {
+  position: relative;
   height: 75.1vh;
   -webkit-transition: all 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   -o-transition: all 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   transition: all 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+/*Stegosaurus*/
+#el_9qw7YG5ol{bottom: -80px;}
+
+
+/*Pterodactyl*/
+#el_QtWbzcDub{bottom: -400px;
+right: 70px;}
+
+/*Brachiosaurus*/
+#el_bKGlCXNk4{bottom: -60px;}
+
+/*Spinosaurus*/
+#el_DVI1BmBbl{bottom: -70px;}
+
+/*Velociraptor*/
+#el_HIsZoHQ82{bottom: -130px;}
+
+/*T-rex*/
+#el_lKFJy92un{bottom: -20px;}
+
+/*Triceratopz*/
+#el_YvppAu-u-{bottom: -50px;}
+
+
+.media-wrapper svg{
+  position: absolute;
+  width: 50%;
+  bottom: -40px;
 }
 
 .timeline-carousel__item-inner {
@@ -80,7 +149,8 @@ h2 {
   z-index: 1;
   position: relative;
   margin: -20px 0 0px;
-  font-weight: 900;
+  font-family: 'Calistoga', sans-serif;
+
 }
 
 .timeline-carousel__item-inner .year {
@@ -90,7 +160,8 @@ h2 {
   display: block;
   position: relative;
   left: 10px;
-  font-weight: 900;
+  z-index: 1;
+  font-family: 'Calistoga', sans-serif;
 }
 
 /* ANNALEES CSS */
@@ -106,20 +177,72 @@ h2 {
 .infobox {
   /* opacity: 0; */
   transition: opacity 1.5s ease;
-  border: 2px solid black;
-  /* position: absolute; */
+  border: 1px solid transparent;
+position: absolute;
   top: 0;
+  width: 40vw;
+  padding: 0 .5em .5em;
+margin-top: -1em;
+margin-left: 1em;
+border-radius: 1em;
+background-color: #ffffff;
+z-index: 1;
 }
+
+.infobox:after{
+  content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: white;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -20px;
+}
+
+.info-audio {
+  display: block;
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+  border-style: solid;
+  box-sizing: border-box;
+  border-width: 37px;
+  border-width: 15px 0px 15px 29px;
+  border-color: white white white #202020;
+  cursor: pointer;
+  background: white;
+}
+
+.info-audio:hover{
+  border-color: white white white grey;
+  transition: 0.4s ease;
+}
+
+.item2 .infobox{
+  margin-left: 15em
+  }
+
+  .item8 .infobox{
+    margin-left: 15em
+    }
 
 #simon_emil {
   height: 20vw;
   width: 10vw;
   position: fixed;
-  bottom: 5vh;
+  bottom: 5.5vh;
   left: 5vw;
+  transform-origin: left bottom;
   transform: scale(var(--scale));
-  transition: scale 2.5s ease;
+  transition: 0.5s ease;
+
 }
+
 
 .visible {
   opacity: 1;
